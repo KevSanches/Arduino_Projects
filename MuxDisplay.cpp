@@ -1,3 +1,8 @@
+//Author: KevSanches
+//Email: kevinsanches@gmail.com
+//The circuit to this code can be found in my circuits.io account, Kevin Sanches, or in the following link: https://circuits.io/circuits/2885051-timer-w-display-mux
+
+
 long tempo=0;
 int dezminu=0, dezsegun=0, unminu=0, unsegun=0, minu=0, segun=0, test=0, dezminust=0, unminust=0, dezsegunst=0, unsegunst=0;
 
