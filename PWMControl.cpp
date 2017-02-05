@@ -1,13 +1,10 @@
 int baseTBJ = 7;
-int PWMPin = 9;
 int control = 0;
 int PWMControl = 0;
 
 void setup() {
 	pinMode(baseTBJ, OUTPUT);
-	pinMode(PWMPin, OUTPUT);
-	digitalWrite(baseTBJ, HIGH);
-	analogWrite(PWMPin, 0);
+	Serial.begin(9600);
 }
 
 void departure(){
@@ -16,7 +13,7 @@ void departure(){
 		if ((millis()-time)>29){
 			control = ((x*5)/1024);
 			PWMControl = ((control*255)/5);
-			analogWrite(PWMPin, PWMControl);
+			analogWrite(baseTBJ, PWMControl);
 			time = millis();
 		}
 	}
@@ -35,7 +32,6 @@ void stop(){
 }
 
 void loop(){ 
-	Serial.begin(9600);
 	if (Serial.read() == "Stop")
 		stop();
 }
