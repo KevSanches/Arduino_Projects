@@ -28,7 +28,7 @@ void stopper(){
     while ((millis()-tempo)<y){} //Every time that xx miliseconds has passed:
       Serial.println(x);
       analogWrite(baseTBJ, x);
-      y++;
+      y--;
   }
 }
 
