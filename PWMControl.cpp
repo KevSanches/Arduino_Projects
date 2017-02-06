@@ -1,45 +1,47 @@
-int baseTBJ = 7;
-int command = 0;
+int baseTBJ = 9;
+char command;
+int z = 0;
 
 void setup() {
-	pinMode(baseTBJ, OUTPUT);
-	Serial.begin(9600);
+  pinMode(baseTBJ, OUTPUT);
+  Serial.begin(9600);
 }
 
-void departure(){
-	int y = 20;
-	for (int x=200; x<256; x++){
-		int time = millis(); //Assign the "Time" variable with the millis function, which returns the time that has passed since the Arduino is turned on
-		if ((millis()-time)>y){ //Every time that 5 miliseconds has passed:
-			analogWrite(baseTBJ, x);
-			y++;
-		}
-	}
+int departure(){
+  int y = 21;
+  for (int x=0; x<256; x++){
+    int tempo = millis(); //Assign the "Time" variable with the millis function, which returns the time that has passed since the Arduino is turned on
+    while ((millis()-tempo)<y){} //Every time that xx miliseconds has passed:
+      Serial.println(x);
+      Serial.println(y);
+      analogWrite(baseTBJ, x);
+      y++;
+      z = x;
+  }
+  return z;
 }
 
-void stop(){
-	int y = 75;
-	for (int x=255; x>200; x--){
-		int time = millis(); //Assign the "Time" variable with the millis function, which returns the time that has passed since the Arduino is turned on
-		if ((millis()-time)>y){ //Every time that x miliseconds has passed:
-			analogWrite(baseTBJ, x);
-			y--;
-		}
-	}
+void stopper(){
+  int y = 100;
+  for (int x=255; x>0; x--){
+    int tempo = millis(); //Assign the "Time" variable with the millis function, which returns the time that has passed since the Arduino is turned on
+    while ((millis()-tempo)<y){} //Every time that xx miliseconds has passed:
+      Serial.println(x);
+      analogWrite(baseTBJ, x);
+      y++;
+  }
 }
 
 void loop(){ 
-	if (Serial.available()){
-		command = Serial.read();
-		if (command == 1){
-			departure();
-		}
-		if (command == 2){
-			stop();
-		}
-	}
+  if (Serial.available()){
+    command = Serial.read();
+    if (command == 'd'){
+      int x = departure();
+      analogWrite(baseTBJ, x);
+    }
+    Serial.println("------------------------------------------------------------------------------------------");
+    if (command == 's'){
+      stopper();
+    }
+  }
 }
-	
-	
-
-
