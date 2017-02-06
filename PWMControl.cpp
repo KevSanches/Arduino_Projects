@@ -18,12 +18,12 @@ void departure(){
 }
 
 void stop(){
-	int y = 20;
+	int y = 75;
 	for (int x=255; x>200; x--){
 		int time = millis(); //Assign the "Time" variable with the millis function, which returns the time that has passed since the Arduino is turned on
-		if ((millis()-time)>y){ //Every time that 29 miliseconds has passed:
+		if ((millis()-time)>y){ //Every time that x miliseconds has passed:
 			analogWrite(baseTBJ, x);
-			y++;
+			y--;
 		}
 	}
 }
@@ -34,7 +34,7 @@ void loop(){
 		if (command == 1){
 			departure();
 		}
-		else{
+		if (command == 2){
 			stop();
 		}
 	}
